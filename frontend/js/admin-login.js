@@ -7,8 +7,12 @@ document.addEventListener('DOMContentLoaded', () => {
   loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value.trim();
+    const password = document.getElementById('password').value.trim();
+
+    // Clear previous error
+    errorMessage.textContent = '';
+    errorMessage.classList.add('hidden');
 
     try {
       const res = await fetch(`${API_URL}/admin/login`, {
@@ -21,15 +25,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const data = await res.json();
 
-      if (res.ok) {
+      if (res.ok && data.token) {
+        // Store token in localStorage
         localStorage.setItem('adminToken', data.token);
+
+        // Redirect to admin dashboard
         window.location.href = 'admin.html';
       } else {
-        errorMessage.textContent = data.message;
+        // Show backend error message
+        errorMessage.textContent = data.message || 'Login failed';
         errorMessage.classList.remove('hidden');
       }
     } catch (error) {
-      errorMessage.textContent = 'Server error';
+      console.error('Login error:', error);
+      errorMessage.textContent = 'Server error. Please try again later.';
       errorMessage.classList.remove('hidden');
     }
   });
