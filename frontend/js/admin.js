@@ -6,6 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'admin-login.html';
   }
 
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${token}`,
+  };
+
+  // Tabs
   const productsTab = document.getElementById('products-tab');
   const usersTab = document.getElementById('users-tab');
   const ordersTab = document.getElementById('orders-tab');
@@ -14,12 +20,13 @@ document.addEventListener('DOMContentLoaded', () => {
   const usersContent = document.getElementById('users-content');
   const ordersContent = document.getElementById('orders-content');
 
-  const addProductForm = document.getElementById('add-product-form');
+  // Tables and forms
   const productsTableBody = document.getElementById('products-table-body');
   const usersTableBody = document.getElementById('users-table-body');
   const ordersTableBody = document.getElementById('orders-table-body');
+  const addProductForm = document.getElementById('add-product-form');
 
-  // Edit Modal Elements
+  // Edit modal
   const editModal = document.getElementById('edit-product-modal');
   const closeModalBtn = document.getElementById('close-modal-btn');
   const editProductForm = document.getElementById('edit-product-form');
@@ -35,10 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const logoutBtn = document.getElementById('logout-btn');
 
-  const headers = {
-    'Authorization': `Bearer ${token}`,
-  };
-
+  // ------------------ Functions ------------------
   const fetchProducts = async () => {
     try {
       const res = await fetch(`${API_URL}/admin/products`, { headers });
@@ -75,6 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
         </tr>
       `).join('');
     } catch (error) {
+      console.error("Failed to fetch users:", error);
     }
   };
 
@@ -91,39 +96,27 @@ document.addEventListener('DOMContentLoaded', () => {
         </tr>
       `).join('');
     } catch (error) {
+      console.error("Failed to fetch orders:", error);
     }
   };
 
-  addProductForm.addEventListener('submit', async (e) => {
+  const addProduct = async (e) => {
     e.preventDefault();
-
-    const name = document.getElementById('name').value;
-    const description = document.getElementById('description').value;
-    const price = document.getElementById('price').value;
-    const discount = document.getElementById('discount').value;
-    const imageUrls = document.getElementById('imageUrls').value;
-    const stock = document.getElementById('stock').value;
-    const category = document.getElementById('category').value;
-    const subcategory = document.getElementById('subcategory').value;
-
     const productData = {
-      name,
-      description,
-      price,
-      discount,
-      imageUrls: imageUrls, // Send the comma-separated string
-      stock,
-      category,
-      subcategory,
+      name: document.getElementById('name').value,
+      description: document.getElementById('description').value,
+      price: document.getElementById('price').value,
+      discount: document.getElementById('discount').value,
+      imageUrls: document.getElementById('imageUrls').value.split(',').map(url => url.trim()),
+      stock: document.getElementById('stock').value,
+      category: document.getElementById('category').value,
+      subcategory: document.getElementById('subcategory').value,
     };
 
     try {
       const res = await fetch(`${API_URL}/admin/products`, {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`,
-        },
+        headers,
         body: JSON.stringify(productData),
       });
 
@@ -132,60 +125,51 @@ document.addEventListener('DOMContentLoaded', () => {
         addProductForm.reset();
       } else {
         const error = await res.json();
+        alert(error.message || 'Failed to add product.');
+      }
+    } catch (error) {
+      console.error('Add product error:', error);
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    try {
+      const res = await fetch(`${API_URL}/admin/products/${id}`, {
+        method: 'DELETE',
+        headers,
+      });
+      if (res.ok) fetchProducts();
+      else {
+        const error = await res.json();
         alert(error.message);
       }
     } catch (error) {
+      console.error('Delete failed:', error);
     }
-  });
+  };
 
-  productsTableBody.addEventListener('click', async (e) => {
-    // Handle Delete Button
-    if (e.target.classList.contains('delete-btn')) {
-      const id = e.target.dataset.id;
-      if (confirm('Are you sure you want to delete this product?')) {
-        try {
-          const res = await fetch(`${API_URL}/admin/products/${id}`, {
-            method: 'DELETE',
-            headers,
-          });
-          if (res.ok) {
-            fetchProducts();
-          } else {
-            const error = await res.json();
-            alert(error.message);
-          }
-        } catch (error) {
-          console.error('Delete failed:', error);
-        }
-      }
+  const openEditModal = async (id) => {
+    try {
+      const res = await fetch(`${API_URL}/admin/products/${id}`, { headers });
+      const product = await res.json();
+
+      editProductId.value = product._id;
+      editName.value = product.name;
+      editDescription.value = product.description;
+      editPrice.value = product.price;
+      editDiscount.value = product.discount || '';
+      editImageUrls.value = product.imageUrls.join(', ');
+      editStock.value = product.stock;
+      editCategory.value = product.category;
+      editSubcategory.value = product.subcategory || '';
+
+      editModal.classList.remove('hidden');
+    } catch (error) {
+      console.error('Failed to load product for edit:', error);
     }
+  };
 
-    // Handle Edit Button
-    if (e.target.classList.contains('edit-btn')) {
-      const id = e.target.dataset.id;
-      try {
-        const res = await fetch(`${API_URL}/products/${id}`, { headers });
-        const { data: product } = await res.json();
-        
-        editProductId.value = product._id;
-        editName.value = product.name;
-        editDescription.value = product.description;
-        editPrice.value = product.price;
-        editDiscount.value = product.discountPrice || '';
-        editImageUrls.value = product.imageUrls.join(', ');
-        editStock.value = product.stock;
-        editCategory.value = product.category;
-        editSubcategory.value = product.subcategory || '';
-
-        editModal.classList.remove('hidden');
-      } catch (error) {
-        console.error('Failed to fetch product for edit:', error);
-      }
-    }
-  });
-
-  // Handle Edit Form Submission
-  editProductForm.addEventListener('submit', async (e) => {
+  const updateProduct = async (e) => {
     e.preventDefault();
     const id = editProductId.value;
     const updatedData = {
@@ -193,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
       description: editDescription.value,
       price: editPrice.value,
       discount: editDiscount.value,
-      imageUrls: editImageUrls.value,
+      imageUrls: editImageUrls.value.split(',').map(url => url.trim()),
       stock: editStock.value,
       category: editCategory.value,
       subcategory: editSubcategory.value,
@@ -202,29 +186,33 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const res = await fetch(`${API_URL}/admin/products/${id}`, {
         method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-          ...headers,
-        },
+        headers,
         body: JSON.stringify(updatedData),
       });
-
       if (res.ok) {
         editModal.classList.add('hidden');
         fetchProducts();
       } else {
         const error = await res.json();
-        alert(`Update failed: ${error.message}`);
+        alert(error.message);
       }
     } catch (error) {
-      console.error('Update submission failed:', error);
+      console.error('Update product failed:', error);
     }
+  };
+
+  // ------------------ Event Listeners ------------------
+  addProductForm.addEventListener('submit', addProduct);
+
+  productsTableBody.addEventListener('click', (e) => {
+    const id = e.target.dataset.id;
+    if (e.target.classList.contains('delete-btn')) deleteProduct(id);
+    if (e.target.classList.contains('edit-btn')) openEditModal(id);
   });
 
-  // Close Modal Logic
-  closeModalBtn.addEventListener('click', () => {
-    editModal.classList.add('hidden');
-  });
+  editProductForm.addEventListener('submit', updateProduct);
+
+  closeModalBtn.addEventListener('click', () => editModal.classList.add('hidden'));
 
   productsTab.addEventListener('click', () => {
     productsContent.classList.remove('hidden');
@@ -251,6 +239,6 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = 'admin-login.html';
   });
 
-  // Initial fetch
+  // Initial load
   fetchProducts();
 });
