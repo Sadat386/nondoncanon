@@ -27,7 +27,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "connect-src": ["'self'"], // you can add your Render URL here
+        "connect-src": ["'self'", "https://nondoncanon-y0hy.onrender.com"],
         "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
       },
     },
@@ -56,7 +56,7 @@ app.use('/api/reviews', reviewRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 
 // ------------------
-// Serve frontend static files
+// Serve frontend static files (CSS, JS, assets)
 // ------------------
 app.use(express.static(path.join(__dirname, '../frontend')));
 
@@ -64,7 +64,6 @@ app.use(express.static(path.join(__dirname, '../frontend')));
 // Explicit HTML routes
 // ------------------
 const htmlDir = path.join(__dirname, '../frontend/html');
-
 const htmlFiles = [
   'index.html', 'products.html', 'product.html', 'cart.html', 'checkout.html',
   'wishlist.html', 'orders.html', 'login.html', 'register.html', 'forgot-password.html',
@@ -78,11 +77,14 @@ htmlFiles.forEach(file => {
 });
 
 // ------------------
-// SPA fallback for unmatched routes (optional for client-side routing)
+// SPA fallback for frontend routing
 // ------------------
 app.get('*', (req, res) => {
-  // Skip API routes
-  if (req.path.startsWith('/api/')) return res.status(404).json({ message: 'API route not found' });
+  // If API route, return 404
+  if (req.path.startsWith('/api/')) {
+    return res.status(404).json({ message: 'API route not found' });
+  }
+  // For all other unmatched frontend routes, serve index.html
   res.sendFile(path.join(htmlDir, 'index.html'));
 });
 
