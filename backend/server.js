@@ -27,7 +27,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "connect-src": ["'self'", "https://nondoncanon-com-ddyw.onrender.com"],
+        "connect-src": ["'self'", "https://nondoncanon-y0hy.onrender.com"],
       },
     },
   })
