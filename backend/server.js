@@ -27,7 +27,7 @@ app.use(
     contentSecurityPolicy: {
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "connect-src": ["'self'", "https://nondoncanon-com-ddyw.onrender.com"],
+        "connect-src": ["'self'"], // you can add your Render URL here
         "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
       },
     },
@@ -61,30 +61,30 @@ app.use('/api/wishlist', wishlistRoutes);
 app.use(express.static(path.join(__dirname, '../frontend')));
 
 // ------------------
-// Serve each HTML page explicitly
+// Explicit HTML routes
 // ------------------
 const htmlDir = path.join(__dirname, '../frontend/html');
 
-app.get('/', (req, res) => res.sendFile(path.join(htmlDir, 'index.html')));
-app.get('/index.html', (req, res) => res.sendFile(path.join(htmlDir, 'index.html')));
-app.get('/products.html', (req, res) => res.sendFile(path.join(htmlDir, 'products.html')));
-app.get('/product.html', (req, res) => res.sendFile(path.join(htmlDir, 'product.html')));
-app.get('/cart.html', (req, res) => res.sendFile(path.join(htmlDir, 'cart.html')));
-app.get('/checkout.html', (req, res) => res.sendFile(path.join(htmlDir, 'checkout.html')));
-app.get('/wishlist.html', (req, res) => res.sendFile(path.join(htmlDir, 'wishlist.html')));
-app.get('/orders.html', (req, res) => res.sendFile(path.join(htmlDir, 'orders.html')));
-app.get('/login.html', (req, res) => res.sendFile(path.join(htmlDir, 'login.html')));
-app.get('/register.html', (req, res) => res.sendFile(path.join(htmlDir, 'register.html')));
-app.get('/forgot-password.html', (req, res) => res.sendFile(path.join(htmlDir, 'forgot-password.html')));
-app.get('/reset-password.html', (req, res) => res.sendFile(path.join(htmlDir, 'reset-password.html')));
-app.get('/admin-login.html', (req, res) => res.sendFile(path.join(htmlDir, 'admin-login.html')));
-app.get('/admin.html', (req, res) => res.sendFile(path.join(htmlDir, 'admin.html')));
-app.get('/search.html', (req, res) => res.sendFile(path.join(htmlDir, 'search.html')));
+const htmlFiles = [
+  'index.html', 'products.html', 'product.html', 'cart.html', 'checkout.html',
+  'wishlist.html', 'orders.html', 'login.html', 'register.html', 'forgot-password.html',
+  'reset-password.html', 'admin-login.html', 'admin.html', 'search.html'
+];
+
+htmlFiles.forEach(file => {
+  app.get(`/${file}`, (req, res) => {
+    res.sendFile(path.join(htmlDir, file));
+  });
+});
 
 // ------------------
-// SPA fallback for any unmatched route
+// SPA fallback for unmatched routes (optional for client-side routing)
 // ------------------
-app.get('*', (req, res) => res.sendFile(path.join(htmlDir, 'index.html')));
+app.get('*', (req, res) => {
+  // Skip API routes
+  if (req.path.startsWith('/api/')) return res.status(404).json({ message: 'API route not found' });
+  res.sendFile(path.join(htmlDir, 'index.html'));
+});
 
 // ------------------
 // Error handling
