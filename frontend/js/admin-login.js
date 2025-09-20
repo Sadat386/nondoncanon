@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
         localStorage.setItem('adminToken', data.token);
 
         // Redirect to admin dashboard
-        window.location.href = 'admin.html';
+        window.location.href = '/admin.html'; // <-- FIXED
       } else {
         // Show backend error message
         errorMessage.textContent = data.message || 'Login failed';
