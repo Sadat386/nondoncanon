@@ -43,15 +43,9 @@ app.use(
 app.use(express.json());
 app.use(cors());
 
-// Serve frontend automatically
-app.use(express.static(path.join(__dirname, '../frontend')));
-
-// Serve index.html for all routes (SPA style)
-app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend/html/index.html'));
-});
-
-// API routes
+// ------------------
+// API routes first
+// ------------------
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/products', productRoutes);
@@ -59,6 +53,16 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/wishlist', wishlistRoutes);
+
+// ------------------
+// Serve frontend static files
+// ------------------
+app.use(express.static(path.join(__dirname, '../frontend')));
+
+// SPA fallback — serve index.html for all non-API routes
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/index.html'));
+});
 
 // Error handling
 app.use(errorHandler);
