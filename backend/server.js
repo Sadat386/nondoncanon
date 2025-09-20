@@ -22,7 +22,16 @@ connectDB();
 const app = express();
 
 // Set security headers
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        ...helmet.contentSecurityPolicy.getDefaultDirectives(),
+        "connect-src": ["'self'", "https://nondoncanon-com-ddyw.onrender.com"],
+      },
+    },
+  })
+);
 
 // Rate limiting
 const limiter = rateLimit({
