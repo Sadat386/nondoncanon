@@ -59,12 +59,52 @@ app.use('/api/wishlist', wishlistRoutes);
 // ------------------
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// SPA fallback — serve index.html for all non-API routes
-app.get('*', (req, res) => {
+// ------------------
+// Serve each HTML page explicitly
+// ------------------
+app.get('/', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../frontend/html/index.html'));
 });
+app.get('/html/products.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/products.html'));
+});
+app.get('/html/cart.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/cart.html'));
+});
+app.get('/html/checkout.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/checkout.html'));
+});
+app.get('/html/wishlist.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/wishlist.html'));
+});
+app.get('/html/orders.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/orders.html'));
+});
+app.get('/html/login.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/login.html'));
+});
+app.get('/html/register.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/register.html'));
+});
+app.get('/html/forgot-password.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/forgot-password.html'));
+});
+app.get('/html/reset-password.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/reset-password.html'));
+});
+app.get('/html/admin-login.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/admin-login.html'));
+});
+app.get('/html/admin.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/admin.html'));
+});
+app.get('/html/search.html', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/search.html'));
+});
 
+// ------------------
 // Error handling
+// ------------------
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
