@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>শর্তাবলি ও নীতিমালা - নন্দনকানন</title>
+  <link href="../css/main.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <script src="../js/navbar.js" defer></script>
+  <script src="../js/navbar.js" defer></script>
+  <script src="../js/active-nav.js" defer></script>
+</head>
+<body class="bg-neutral font-sans">
+
+  <!-- Navbar -->
+<nav class="bg-white shadow-md">
+    <div class="container mx-auto px-6 py-3 flex items-center justify-between">
+      <div class="text-2xl font-bold text-gray-800">
+        <a href="index.html">
+          <img src="../public/logo.jpg" alt="Sadat.d" class="h-10">
+        </a>
+      </div>
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="index.html" class="text-gray-800 hover:text-accent">Home</a>
+        <a href="products.html" class="text-gray-800 hover:text-accent glowing-link">Products</a>
+        <a href="orders.html" class="text-gray-800 hover:text-accent">My Orders</a>
+        <a href="wishlist.html" class="text-gray-800 hover:text-accent">Wishlist</a>
+      </div>
+      <div class="hidden md:flex items-center space-x-4">
+        <a href="cart.html" class="text-gray-800 hover:text-accent">
+          <i class="fas fa-shopping-cart"></i>
+        </a>
+        <a href="login.html" id="login-link" class="text-gray-800 hover:text-accent flex items-center">
+          <i class="fas fa-user mr-2"></i>
+          <span>Log In</span>
+        </a>
+        <div id="user-greeting"></div>
+        <button id="logout-btn" class="bg-accent text-white px-4 py-2 rounded-md hover:bg-opacity-80 flex items-center">
+          <i class="fas fa-sign-out-alt mr-2"></i>
+          <span>Log Out</span>
+        </button>
+      </div>
+      <div class="md:hidden flex items-center">
+        <button id="mobile-menu-button" class="text-gray-800 hover:text-accent focus:outline-none">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden">
+      <a href="index.html" class="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100">Home</a>
+      <a href="products.html" class="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100">Products</a>
+      <a href="orders.html" class="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100">My Orders</a>
+      <a href="wishlist.html" class="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100">Wishlist</a>
+      <a href="cart.html" class="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100">Cart</a>
+      <a href="login.html" id="mobile-login-link" class="block py-2 px-4 text-sm text-gray-800 hover:bg-gray-100">Log In</a>
+      <div id="mobile-user-greeting" class="px-4 py-2 text-sm text-gray-800"></div>
+      <button id="mobile-logout-btn" class="w-full text-left block py-2 px-4 text-sm text-red-500 hover:bg-gray-100">Log Out</button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="container mx-auto px-6 py-12">
+    <div class="p-1.5 rounded-lg bg-gradient-to-br from-pink-500 via-red-500 to-yellow-500 shadow-2xl">
+      <div class="bg-white max-w-4xl mx-auto p-8 md:p-12 rounded-lg">
+        <h1 class="text-4xl font-bold text-center mb-8 bg-clip-text text-transparent bg-gradient-to-r from-accent to-primary">নন্দনকানন – শর্তাবলি ও নীতিমালা</h1>
+        <p class="text-gray-600 text-center mb-12">নন্দনকাননে আপনাকে স্বাগতম। আমাদের ওয়েবসাইট ও সার্ভিস ব্যবহার করার মাধ্যমে আপনি নিচের শর্তাবলি ও নীতিমালা মেনে নিচ্ছেন। অনুগ্রহ করে ভালোভাবে পড়ে নিন।</p>
+
+        <div class="space-y-10 text-gray-700 leading-relaxed">
+          <section>
+            <h2 class="flex items-center text-2xl font-semibold text-primary border-b-2 border-gray-200 pb-2 mb-4"><i class="fas fa-shopping-cart text-accent mr-3"></i>১. অর্ডার ও ক্রয়</h2>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+              <li>গ্রাহকরা ওয়েবসাইটে প্রদর্শিত পণ্য দেখে অর্ডার করতে পারবেন।</li>
+              <li>অর্ডার দেওয়ার সময় সঠিক <strong>ঠিকানা, ফোন নম্বর ও যোগাযোগের তথ্য</strong> প্রদান করা আবশ্যক।</li>
+              <li>ভুল তথ্য প্রদান করলে ডেলিভারি ব্যর্থ হতে পারে এবং সে ক্ষেত্রে নন্দনকানন দায়ী থাকবে না।</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="flex items-center text-2xl font-semibold text-primary border-b-2 border-gray-200 pb-2 mb-4"><i class="fas fa-credit-card text-accent mr-3"></i>২. মূল্য ও পেমেন্ট</h2>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+              <li>সব পণ্যের মূল্য ওয়েবসাইটে প্রদর্শিত হবে।</li>
+              <li>আমরা অনলাইন পেমেন্ট (বিকাশ, নগদ, কার্ড ইত্যাদি) এবং <strong>ক্যাশ অন ডেলিভারি (COD)</strong> সাপোর্ট করি।</li>
+              <li>অর্ডার কনফার্মেশনের পর মূল্য পরিবর্তন হবে না।</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="flex items-center text-2xl font-semibold text-primary border-b-2 border-gray-200 pb-2 mb-4"><i class="fas fa-truck text-accent mr-3"></i>৩. ডেলিভারি নীতি</h2>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+              <li>আমরা <strong>হোম ডেলিভারি</strong> এর মাধ্যমে আপনার অর্ডার পৌঁছে দিই।</li>
+              <li>ডেলিভারি সময়সীমা সাধারণত ২–৭ কার্যদিবস, তবে আপনার এলাকার অবস্থান অনুযায়ী ভিন্ন হতে পারে।</li>
+              <li>ডেলিভারির সময় গ্রাহক বা নির্ধারিত ব্যক্তির উপস্থিতি নিশ্চিত করতে হবে।</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="flex items-center text-2xl font-semibold text-primary border-b-2 border-gray-200 pb-2 mb-4"><i class="fas fa-undo-alt text-accent mr-3"></i>৪. রিটার্ন ও রিফান্ড নীতি</h2>
+            <h3 class="text-xl font-semibold text-secondary mt-6 mb-3">রিফান্ডের ধরন</h3>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+              <li><strong>রিটার্ন থেকে রিফান্ড</strong> – পণ্য ফেরত এসে গুণগত যাচাই (QC) সম্পন্ন হলে রিফান্ড শুরু হবে।</li>
+              <li><strong>বাতিল অর্ডার থেকে রিফান্ড</strong> – অর্ডার বাতিল সফলভাবে হলে রিফান্ড স্বয়ংক্রিয়ভাবে শুরু হবে।</li>
+              <li><strong>ব্যর্থ ডেলিভারি থেকে রিফান্ড</strong> – নির্দিষ্ট ঠিকানায় ডেলিভারি ব্যর্থ হলে এবং পণ্য ফেরত এলে রিফান্ড শুরু হবে।</li>
+            </ul>
+            <h3 class="text-xl font-semibold text-secondary mt-6 mb-3">রিটার্নের শর্তাবলি</h3>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+              <li>পণ্য অবশ্যই <strong>অব্যবহৃত, অক্ষত ও পরিষ্কার</strong> থাকতে হবে।</li>
+              <li>মূল <strong>ট্যাগ, ইনভয়েস, ওয়ারেন্টি কার্ড, গিফট আইটেম ও আনুষঙ্গিক জিনিসপত্র</strong> ফেরত দিতে হবে।</li>
+              <li>পণ্য অবশ্যই আসল <strong>প্রস্তুতকারকের প্যাকেজিং/বাক্সে</strong> ফেরত দিতে হবে।</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="flex items-center text-2xl font-semibold text-primary border-b-2 border-gray-200 pb-2 mb-4"><i class="fas fa-user-shield text-accent mr-3"></i>৬. প্রাইভেসি নীতি</h2>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+              <li>আপনার ব্যক্তিগত তথ্য (যেমন নাম, ফোন নম্বর, ঠিকানা) আমরা শুধুমাত্র অর্ডার ডেলিভারির উদ্দেশ্যে ব্যবহার করব।</li>
+              <li>আমরা কোনো অবস্থাতেই আপনার তথ্য তৃতীয় পক্ষের কাছে বিক্রি বা অপব্যবহার করব না।</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="flex items-center text-2xl font-semibold text-primary border-b-2 border-gray-200 pb-2 mb-4"><i class="fas fa-gavel text-accent mr-3"></i>৯. নীতিমালা পরিবর্তন</h2>
+            <ul class="list-disc list-inside space-y-2 pl-4">
+              <li>নন্দনকানন সময় অনুযায়ী শর্তাবলি ও নীতিমালা পরিবর্তনের অধিকার রাখে।</li>
+              <li>যেকোনো আপডেট ওয়েবসাইটে প্রকাশ করা হবে এবং তাৎক্ষণিকভাবে কার্যকর হবে।</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 class="flex items-center text-2xl font-semibold text-primary border-b-2 border-gray-200 pb-2 mb-4"><i class="fas fa-envelope text-accent mr-3"></i>১০. যোগাযোগ</h2>
+            <p>যেকোনো প্রশ্ন বা সহায়তার জন্য আমাদের সাথে যোগাযোগ করুন:</p>
+            <p><strong>হেল্পলাইন:</strong> [আপনার নম্বর]<br>
+               <strong>ইমেইল:</strong> [আপনার ইমেইল]</p>
+          </section>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-primary text-white">
+    <div class="container mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
+      <div>
+        <h3 class="text-lg font-bold mb-4">Sadat.d</h3>
+        <p class="text-gray-400">Your one-stop shop for the latest fashion trends in sarees, clothes, and ornaments.</p>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold mb-4">Shop</h3>
+        <ul class="space-y-2">
+          <li><a href="products.html" class="text-gray-400 hover:text-white">All Products</a></li>
+          <li><a href="products.html?category=Sarees" class="text-gray-400 hover:text-white">Sarees</a></li>
+          <li><a href="products.html?category=Clothes" class="text-gray-400 hover:text-white">Clothes</a></li>
+          <li><a href="products.html?category=Ornaments" class="text-gray-400 hover:text-white">Ornaments</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold mb-4">About Us</h3>
+        <ul class="space-y-2">
+          <li><a class="text-gray-400 hover:text-white">Our Story</a></li>
+          <li><a class="text-gray-400 hover:text-white">Contact Us</a></li>
+          <li><a href="terms_and_conditions.html" class="text-gray-400 hover:text-white">Terms & Conditions</a></li>
+          <li><a class="text-gray-400 hover:text-white">FAQs</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-lg font-bold mb-4">Follow Us</h3>
+        <div class="flex space-x-4">
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
+        </div>
+      </div>
+    </div>
+    <div class="bg-primary mt-8 py-4 text-center text-gray-400">
+      <p>&copy; 2025 নন্দনকানন. All rights reserved.</p>
+      <p class="text-sm mt-2">Developed by <a href="https://sadat-dev.netlify.app" target="_blank" rel="noopener noreferrer" class="glowing-text">A. M. Sadat</a></p>
+    </div>
+  </footer>
+
+  <script type="module" src="../js/auth.js"></script>
+</body>
+</html>

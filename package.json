@@ -1,0 +1,19 @@
+{
+  "name": "ecommerce-website",
+  "private": true,
+  "version": "1.0.0",
+  "workspaces": [
+    "backend",
+    "frontend"
+  ],
+  "scripts": {
+    "start": "cd backend && npm start"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2"
+  },
+  "dependencies": {
+    "cloudinary": "^2.7.0",
+    "multer": "^2.0.2"
+  }
+}

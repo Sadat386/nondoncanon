@@ -1,0 +1,20 @@
+{
+  "name": "ecommerce-frontend",
+  "version": "1.0.0",
+  "description": "Frontend for the e-commerce website",
+  "scripts": {
+    "build:css": "tailwindcss -i ./css/source.css -o ./css/main.css",
+    "watch:css": "tailwindcss -i ./css/source.css -o ./css/main.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "tailwindcss": "^3.4.1"
+  },
+  "dependencies": {
+    "dompurify": "^3.2.7",
+    "ecommerce-website": "file:..",
+    "multer": "2.0.2"
+  }
+}
