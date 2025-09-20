@@ -9,101 +9,49 @@ const orderRoutes = require('./routes/orderRoutes');
 const reviewRoutes = require('./routes/reviewRoutes');
 const wishlistRoutes = require('./routes/wishlistRoutes');
 const cors = require('cors');
-
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
-const { errorHandler } = require('./middleware/errorMiddleware'); // Import errorHandler
-const path = require('path'); // Import path module
+const { errorHandler } = require('./middleware/errorMiddleware');
+const path = require('path');
 
 dotenv.config();
-
 connectDB();
 
 const app = express();
 
-// Set security headers
+// Helmet security with CSP updates
 app.use(
   helmet({
     contentSecurityPolicy: {
       directives: {
         ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-        "connect-src": ["'self'", "https://nondoncanon-y0hy.onrender.com"],
+        "connect-src": ["'self'", "https://nondoncanon-com-ddyw.onrender.com"],
+        "img-src": ["'self'", "data:", "https://res.cloudinary.com"],
       },
     },
   })
 );
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 100, // limit each IP to 100 requests per windowMs
-});
-app.use(limiter);
+// Rate limiter
+app.use(
+  rateLimit({
+    windowMs: 15 * 60 * 1000,
+    max: 100,
+  })
+);
 
-app.use(express.json()); // Body parser for JSON data
-
-
+app.use(express.json());
 app.use(cors());
 
-// Serve static frontend files
+// Serve frontend automatically
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-app.get('/', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'index.html'));
+// Serve index.html for all routes (SPA style)
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../frontend/html/index.html'));
 });
 
-app.get('/html/admin-login.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'admin-login.html'));
-});
-
-app.get('/html/admin.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'admin.html'));
-});
-
-app.get('/html/cart.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'cart.html'));
-});
-
-app.get('/html/checkout.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'checkout.html'));
-});
-
-app.get('/html/forgot-password.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'forgot-password.html'));
-});
-
-app.get('/html/login.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'login.html'));
-});
-
-app.get('/html/orders.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'orders.html'));
-});
-
-app.get('/html/product.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'product.html'));
-});
-
-app.get('/html/products.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'products.html'));
-});
-
-app.get('/html/register.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'register.html'));
-});
-
-app.get('/html/reset-password.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'reset-password.html'));
-});
-
-app.get('/html/search.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'search.html'));
-});
-
-app.get('/html/wishlist.html', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../frontend', 'html', 'wishlist.html'));
-});
-
+// API routes
 app.use('/api/auth', authRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/products', productRoutes);
@@ -112,23 +60,22 @@ app.use('/api/orders', orderRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/wishlist', wishlistRoutes);
 
-// Error handling middleware
+// Error handling
 app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000;
+const server = app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
 
 // Handle unhandled promise rejections
 process.on('unhandledRejection', (err, promise) => {
-  // Close server & exit process
+  console.error(err);
   server.close(() => process.exit(1));
 });
 
 // Handle uncaught exceptions
 process.on('uncaughtException', (err, origin) => {
-  // Close server & exit process
+  console.error(err);
   server.close(() => process.exit(1));
-});
-
-const server = app.listen(PORT, () => {
-
 });
