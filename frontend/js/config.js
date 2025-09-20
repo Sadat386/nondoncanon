@@ -1,1 +1,1 @@
-export const API_URL = 'https://nondoncanon-com-ddyw.onrender.com/api';
+export const API_URL = 'https://nondoncanon-y0hy.onrender.com';
