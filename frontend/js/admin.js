@@ -165,19 +165,23 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = editBtn.dataset.id;
       try {
         const res = await fetch(`${API_URL}/products/${id}`);
-       const { data: product } = await res.json();
+        const { data: product } = await res.json();
 
-        editProductId.value = product._id;
-        editName.value = product.name;
-        editDescription.value = product.description;
-        editPrice.value = product.price;
-        editDiscount.value = product.discountPrice;
-        editImageUrls.value = product.imageUrls.join(', ');
-        editStock.value = product.stock;
-        editCategory.value = product.category;
-        editSubcategory.value = product.subcategory;
+        if (product) {
+          editProductId.value = product._id;
+          editName.value = product.name;
+          editDescription.value = product.description;
+          editPrice.value = product.price;
+          editDiscount.value = product.discountPrice;
+          editImageUrls.value = product.imageUrls ? product.imageUrls.join(', ') : '';
+          editStock.value = product.stock;
+          editCategory.value = product.category;
+          editSubcategory.value = product.subcategory;
 
-        editModal.classList.remove('hidden');
+          editModal.classList.remove('hidden');
+        } else {
+          console.error('Product not found');
+        }
       } catch (error) {
         console.error('Error fetching product for edit:', error);
       }
