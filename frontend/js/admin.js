@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = editBtn.dataset.id;
       try {
         const res = await fetch(`${API_URL}/products/${id}`);
-        168 +   const { data: product } = await res.json();
+       const { data: product } = await res.json();
 
         editProductId.value = product._id;
         editName.value = product.name;
