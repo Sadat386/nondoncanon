@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = editBtn.dataset.id;
       try {
         const res = await fetch(`${API_URL}/products/${id}`);
-        const product = await res.json();
+        168 +   const { data: product } = await res.json();
 
         editProductId.value = product._id;
         editName.value = product.name;
@@ -187,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const id = deleteBtn.dataset.id;
       if (confirm('Are you sure you want to delete this product?')) {
         try {
-          const res = await fetch(`${API_ur_l}/admin/products/${id}`, {
+          const res = await fetch(`${API_URL}/admin/products/${id}`, {
             method: 'DELETE',
             headers,
           });
