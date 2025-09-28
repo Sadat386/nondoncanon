@@ -1,4 +1,6 @@
 import { API_URL } from './config.js';
+import { addToCart } from './utils.js';
+import { showNotification } from './notification.js';
 
 document.addEventListener('DOMContentLoaded', () => {
   const wishlistItemsContainer = document.querySelector('#wishlist-items');
@@ -49,6 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const handleRemoveItem = async (productId) => {
     if (!token) {
+      showNotification('Please log in to modify your wishlist.', 'error');
       window.location.href = 'login.html';
       return;
     }
@@ -62,41 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       if (response.ok) {
-        alert('Item removed from wishlist!');
+        showNotification('Item removed from wishlist!', 'success');
         getWishlistItems();
       } else {
-        alert('Failed to remove item from wishlist.');
+        showNotification('Failed to remove item from wishlist.', 'error');
       }
     } catch (error) {
-      alert('Error removing item from wishlist.');
-    }
-  };
-
-  const handleAddToCart = async (productId) => {
-    if (!token) {
-      alert('Please log in to add items to your cart.');
-      window.location.href = 'login.html';
-      return;
-    }
-
-    try {
-      const res = await fetch(`${API_URL}/cart`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        },
-        body: JSON.stringify({ productId, quantity: 1 })
-      });
-
-      if (res.ok) {
-        alert('Product added to cart!');
-      } else {
-        const error = await res.json();
-        alert(error.message);
-      }
-    } catch (error) {
-      alert('Error adding to cart.');
+      showNotification('Error removing item from wishlist.', 'error');
     }
   };
 
@@ -107,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     if (e.target.closest('.add-to-cart-btn')) {
       const productId = e.target.closest('.add-to-cart-btn').dataset.productId;
-      handleAddToCart(productId);
+      addToCart(productId);
     }
   });
 
