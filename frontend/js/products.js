@@ -80,8 +80,14 @@ document.addEventListener('DOMContentLoaded', () => {
   categoryLinks.forEach(link => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      filters.category = e.target.dataset.category || '';
-      filters.subcategory = e.target.dataset.subcategory || '';
+      const category = e.target.dataset.category || '';
+      if (category === 'all') {
+        filters.category = '';
+        filters.subcategory = '';
+      } else {
+        filters.category = category;
+        filters.subcategory = e.target.dataset.subcategory || '';
+      }
       getProducts();
     });
   });
