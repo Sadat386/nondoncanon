@@ -145,43 +145,70 @@
   </main>
 
   <!-- Footer -->
-  <footer class="bg-primary text-white">
-    <div class="container mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div>
-        <h3 class="text-lg font-bold mb-4">Sadat.d</h3>
-        <p class="text-gray-400">Your one-stop shop for the latest fashion trends in sarees, clothes, and ornaments.</p>
-      </div>
-      <div>
-        <h3 class="text-lg font-bold mb-4">Shop</h3>
-        <ul class="space-y-2">
-          <li><a href="products.html" class="text-gray-400 hover:text-white">All Products</a></li>
-          <li><a href="products.html?category=Sarees" class="text-gray-400 hover:text-white">Sarees</a></li>
-          <li><a href="products.html?category=Clothes" class="text-gray-400 hover:text-white">Clothes</a></li>
-          <li><a href="products.html?category=Ornaments" class="text-gray-400 hover:text-white">Ornaments</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-bold mb-4">About Us</h3>
-        <ul class="space-y-2">
-          <li><a class="text-gray-400 hover:text-white">Our Story</a></li>
-          <li><a class="text-gray-400 hover:text-white">Contact Us</a></li>
-          <li><a href="terms_and_conditions.html" class="text-gray-400 hover:text-white">Terms & Conditions</a></li>
-          <li><a class="text-gray-400 hover:text-white">FAQs</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3 class="text-lg font-bold mb-4">Follow Us</h3>
-        <div class="flex space-x-4">
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
-          <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-pinterest"></i></a>
+  <footer class="bg-orange-600 text-white">
+    <div class="container mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Branding and Social -->
+      <div class="space-y-4">
+        <h3 class="text-2xl font-bold">নন্দনকানন</h3>
+        <p class="text-gray-200 text-sm max-w-xs">ফ্যাশন ও সৌন্দর্যের নির্ভরযোগ্য ঠিকানা। আসল পণ্য, ন্যায্য দাম, ভরসার প্রতিশ্রুতি।</p>
+        <div>
+          <h4 class="text-lg font-semibold uppercase tracking-wider mb-3">Follow Us</h4>
+          <div class="flex space-x-4">
+            <a href="https://www.facebook.com/share/1ZZcETvqtr/" target="_blank" rel="noopener noreferrer" class="hover:text-gray-200 transition-transform duration-300 hover:scale-110">
+              <i class="fab fa-facebook text-2xl"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-gray-200 transition-transform duration-300 hover:scale-110">
+              <i class="fab fa-instagram text-2xl"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-gray-200 transition-transform duration-300 hover:scale-110">
+              <i class="fab fa-twitter text-2xl"></i>
+            </a>
+            <a href="#" target="_blank" rel="noopener noreferrer" class="hover:text-gray-200 transition-transform duration-300 hover:scale-110">
+              <i class="fab fa-pinterest text-2xl"></i>
+            </a>
+          </div>
         </div>
       </div>
+
+      <!-- Shop Section -->
+      <div>
+        <h3 class="text-lg font-semibold uppercase tracking-wider border-b border-white/30 pb-2 mb-4">Shop</h3>
+        <div class="grid grid-cols-2 gap-x-4">
+          <ul class="space-y-2">
+            <li><a href="products.html" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">All Products</a></li>
+            <li class="font-semibold text-white mt-2">Sarees</li>
+            <ul class="space-y-1 pl-2">
+              <li><a href="products.html?category=Sarees&subcategory=Jamdani" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Jamdani</a></li>
+              <li><a href="products.html?category=Sarees&subcategory=Muslin" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Muslin</a></li>
+              <li><a href="products.html?category=Sarees&subcategory=Katan" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Katan</a></li>
+            </ul>
+          </ul>
+          <ul class="space-y-2">
+             <li class="font-semibold text-white opacity-0">Sarees</li> <!-- Spacer -->
+             <ul class="space-y-1 pl-2">
+                <li><a href="products.html?category=Sarees&subcategory=Tant" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Tant</a></li>
+                <li><a href="products.html?category=Sarees&subcategory=Silk" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Silk</a></li>
+             </ul>
+            <li class="font-semibold text-white mt-2"><a href="products.html?category=Combo+Packs" class="hover:text-white transition-transform duration-200 hover:translate-x-1 block">Combo Packs</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Customer Care Section -->
+      <div>
+        <h3 class="text-lg font-semibold uppercase tracking-wider border-b border-white/30 pb-2 mb-4">Customer Care</h3>
+        <ul class="space-y-2">
+          <li><a href="#" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Contact Us</a></li>
+          <li><a href="#" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">FAQs</a></li>
+          <li><a href="terms_and_conditions.html" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Terms & Conditions</a></li>
+          <li><a href="#" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Shipping & Return</a></li>
+          <li><a href="#" class="text-gray-200 hover:text-white transition-transform duration-200 hover:translate-x-1 block">Our Story</a></li>
+        </ul>
+      </div>
     </div>
-    <div class="bg-primary mt-8 py-4 text-center text-gray-400">
-      <p>&copy; 2025 নন্দনকানন. All rights reserved.</p>
-      <p class="text-sm mt-2">Developed by <a href="https://sadat-dev.netlify.app" target="_blank" rel="noopener noreferrer" class="glowing-text">A. M. Sadat</a></p>
+    <div class="bg-orange-700 py-4">
+      <p class="text-center text-gray-200 text-sm">&copy; 2025 নন্দনকানন. All rights reserved.</p>
+      <p class="text-center text-xs text-gray-300 mt-1">Developed by <a href="https://sadat-dev.netlify.app" target="_blank" rel="noopener noreferrer" class="hover:text-white">A. M. Sadat</a></p>
     </div>
   </footer>
 
