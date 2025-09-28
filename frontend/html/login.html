@@ -11,6 +11,7 @@
   <script src="../js/navbar.js" defer></script>
   <script src="../js/navbar.js" defer></script>
   <script src="../js/active-nav.js" defer></script>
+  <link rel="icon" href="../public/logo.svg" type="image/svg+xml">
 </head>
 <body class="bg-neutral font-sans">
   <div id="notification-container" class="fixed top-0 left-1/2 -translate-x-1/2 mt-4 z-50 w-full max-w-sm"></div>
@@ -31,8 +32,14 @@
         
       </div>
       <div class="flex items-center space-x-4">
-        <a href="cart.html" class="text-gray-800 hover:text-accent">
-          <i class="fas fa-shopping-cart"></i>
+        <a href="cart.html" class="relative group text-gray-800 hover:text-accent p-2 transition-transform duration-200 hover:scale-110">
+          <i class="fas fa-shopping-cart text-2xl"></i>
+          <span id="cart-item-count" class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-bold rounded-full h-4 w-4 flex items-center justify-center">
+            0
+          </span>
+          <span class="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 w-max bg-gray-800 text-white text-xs rounded-md py-1 px-3 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none">
+            View Cart
+          </span>
         </a>
         <a href="login.html" id="login-link" class="text-gray-800 hover:text-accent flex items-center">
           <i class="fas fa-user mr-2"></i>

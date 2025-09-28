@@ -54,6 +54,7 @@ document.addEventListener('DOMContentLoaded', () => {
       products.forEach(product => {
         const row = document.createElement('tr');
         row.innerHTML = `
+          <td class="py-2 px-4 border-b"><img src="${product.imageUrls[0] || 'https://via.placeholder.com/150'}" alt="${product.name}" class="w-16 h-16 object-cover rounded"></td>
           <td class="py-2 px-4 border-b">${product.name}</td>
           <td class="py-2 px-4 border-b">${product.price}</td>
           <td class="py-2 px-4 border-b">${product.stock}</td>
